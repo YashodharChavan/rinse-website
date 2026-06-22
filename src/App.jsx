@@ -24,7 +24,9 @@ import {
   User,
   Check,
   Ghost,
-  Sparkles
+  Sparkles,
+  Smartphone,
+  Archive
 } from 'lucide-react'
 const repoSlug = import.meta.env.VITE_GITHUB_REPO || 'YashodharChavan/rinse'
 const repoUrl = `https://github.com/${repoSlug}`
@@ -262,12 +264,12 @@ function Header() {
         {/* Updated GitHub Button */}
         <NeoButton href={repoUrl} className="px-3 py-2 text-xs sm:text-sm whitespace-nowrap">
           <Star size={16} fill="currentColor" className="shrink-0" />
-          
+
           {/* Desktop Text */}
           <span>
             Star on GitHub {status === 'ready' && `(${formatStars(stars)})`}
           </span>
-          
+
         </NeoButton>
       </div>
     </header>
@@ -477,19 +479,19 @@ function ProblemSection() {
 
         {/* Left Column: The Problem (with Relative positioning for Stickers) */}
         <div className="relative flex flex-col justify-center">
-          
+
           {/* Floating Stickers */}
-          <FloatingSticker 
-            icon={Zap} 
-            color="bg-yellow-300" 
-            className="-top-8 right-10 lg:-right-4" 
-            delay={0} 
+          <FloatingSticker
+            icon={Zap}
+            color="bg-yellow-300"
+            className="-top-8 right-10 lg:-right-4"
+            delay={0}
           />
-          <FloatingSticker 
-            icon={Sparkles} 
-            color="bg-pink-300" 
-            className="bottom-1/3 -right-8 lg:-right-12" 
-            delay={0.7} 
+          <FloatingSticker
+            icon={Sparkles}
+            color="bg-pink-300"
+            className="bottom-1/3 -right-8 lg:-right-12"
+            delay={0.7}
           />
 
           <div className="relative z-10">
@@ -508,10 +510,10 @@ function ProblemSection() {
 
         {/* Right Column: Cards & Banner */}
         <div className="flex flex-col gap-6">
-          
+
           {/* Two Tall Cards Grid */}
           <div className="grid gap-6 sm:grid-cols-2 items-stretch">
-            
+
             {/* Resident Card */}
             <div className="flex flex-col border-4 border-black bg-white shadow-[7px_7px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]">
               {/* Card Header */}
@@ -555,9 +557,9 @@ function ProblemSection() {
           </div> {/* End of Cards Grid */}
 
           {/* GitHub CTA Banner - Now spanning the full width underneath! */}
-          <a 
-            href="https://github.com/YashodharChavan/rinse" 
-            target="_blank" 
+          <a
+            href="https://github.com/YashodharChavan/rinse"
+            target="_blank"
             rel="noopener noreferrer"
             className="block border-4 border-black bg-pink-300 p-5 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
           >
@@ -716,9 +718,10 @@ function Releases() {
             </div>
             <span className="inline-flex w-fit items-center gap-2 border-4 border-black bg-lime-300 px-3 py-2 text-xs font-black uppercase">
               <Download size={16} />
-              {status === 'loading' ? 'Loading' : 'GitHub release'}
+              {status === 'loading' ? 'Loading' : 'Android Ready'}
             </span>
           </div>
+
           <div className="grid gap-4 pt-5 sm:grid-cols-2">
             <div className="border-4 border-black bg-cyan-100 p-4">
               <p className="text-xs font-black uppercase">Release note</p>
@@ -729,14 +732,37 @@ function Releases() {
               <p className="mt-2 text-xl font-black uppercase">{releaseDate}</p>
             </div>
           </div>
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <NeoButton href={release?.url || `${repoUrl}/releases`}>
-              <ExternalLink size={20} />
-              View latest release
+
+          {/* NEW BUTTON GROUP */}
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row flex-wrap">
+
+            {/* 1. Android Direct Download */}
+            <NeoButton
+              href="https://github.com/YashodharChavan/rinse/releases/download/v1.0.0/Rinse-V1.0.0.apk"
+              download
+            >
+              <Download size={20} />
+              ANDROID (.APK)
             </NeoButton>
+
+            {/* 2. iOS Disabled/Coming Soon */}
+            <NeoButton
+              href="#"
+              variant="secondary"
+              onClick={(e) => e.preventDefault()}
+              className="bg-gray-200 text-gray-500 hover:translate-y-0 hover:translate-x-0 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-not-allowed opacity-80"
+              title="Apple App Store approval is pending"
+            >
+              <Smartphone size={20} />
+              iOS (SOON)
+            </NeoButton>
+
+            {/* 3. GitHub Releases Fallback */}
             <NeoButton href={`${repoUrl}/releases`} variant="secondary">
-              All releases
+              <Archive size={20} /> {/* Or List / ExternalLink depending on your imports */}
+              ALL RELEASES
             </NeoButton>
+
           </div>
         </div>
       </div>
