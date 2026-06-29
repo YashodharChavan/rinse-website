@@ -738,7 +738,7 @@ function Releases() {
 
             {/* 1. Android Direct Download */}
             <NeoButton
-              href="https://github.com/YashodharChavan/rinse/releases/download/v1.2.0/Rinse-V1.2.0.apk"
+              href="https://github.com/YashodharChavan/rinse/releases/download/v2.0.0/Rinse-V2.0.0.apk"
               download
             >
               <Download size={20} />
